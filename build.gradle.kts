@@ -23,6 +23,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("com.mysql:mysql-connector-j:9.0.0")
+	implementation("org.springframework.security:spring-security-crypto")
+	implementation ("org.modelmapper:modelmapper:3.2.1")
+
 
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

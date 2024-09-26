@@ -1,49 +1,40 @@
-package com.example.trailszonefinder.model.entity;
+package com.example.trailszonefinder.web.dto;
 
+import com.example.trailszonefinder.model.entity.Role;
 import com.example.trailszonefinder.model.enums.Level;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
-import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "users")
-public class User extends BaseEntity {
+public class UserRegisterDTO {
     @NotBlank
     @Size(min = 5, max = 20)
-    @Column(nullable = false)
     private String username;
 
     @NotBlank
     @Size(min = 5,max = 200)
-    @Column(nullable = false)
     private String password;
 
     @NotBlank
     @Size(min = 2,max = 30)
-    @Column(name = "full_name")
     private String fullName;
+    @NotBlank
+    @Email
+    private String email;
 
     @NotNull
     @Min(16)
     @Max(100)
     private int age;
 
-    @NotBlank
-    @Email
-    private String email;
-
-    @ManyToMany
-    private Set<Role> roles;
-
-    @Enumerated(EnumType.STRING)
     private Level level;
 
 
-    public User() {
-        this.roles = new HashSet<>();
+
+    public UserRegisterDTO() {
     }
+
+
 
     public String getUsername() {
         return username;
@@ -77,12 +68,12 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public int getAge() {
+        return age;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public Level getLevel() {
@@ -91,13 +82,5 @@ public class User extends BaseEntity {
 
     public void setLevel(Level level) {
         this.level = level;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 }
