@@ -2,13 +2,19 @@ package com.example.trailszonefinder.web.dto;
 
 import com.example.trailszonefinder.model.entity.Role;
 import com.example.trailszonefinder.model.enums.Level;
+import com.example.trailszonefinder.validation.annotation.PasswordsMatch;
+import com.example.trailszonefinder.validation.annotation.UniqueEmail;
+import com.example.trailszonefinder.validation.annotation.UniqueUsername;
+import com.example.trailszonefinder.validation.annotation.WithoutDigits;
 import jakarta.validation.constraints.*;
 
 import java.util.Set;
 
+@PasswordsMatch
 public class UserRegisterDTO {
     @NotBlank
     @Size(min = 5, max = 20)
+    @UniqueUsername
     private String username;
 
     @NotBlank
@@ -16,10 +22,17 @@ public class UserRegisterDTO {
     private String password;
 
     @NotBlank
+    @Size(min = 5,max = 200)
+    private String confirmPassword;
+
+    @NotBlank
     @Size(min = 2,max = 30)
+    @WithoutDigits
     private String fullName;
     @NotBlank
-    @Email
+    @Email(regexp = "^[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)?@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}$"
+            ,message = "Please insert a valid email!")
+    @UniqueEmail
     private String email;
 
     @NotNull
@@ -50,6 +63,14 @@ public class UserRegisterDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getFullName() {
